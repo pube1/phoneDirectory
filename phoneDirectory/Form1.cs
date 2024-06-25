@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.OleDb;
+using System.IO;
 
 namespace phoneDirectory
 {
@@ -19,10 +20,11 @@ namespace phoneDirectory
             InitializeComponent();
         }
 
-        SQLiteConnection conn = new SQLiteConnection("Data Source="+ Application.StartupPath + "\\Resources\\phoneDirection.db; Version=3");
-
+        SQLiteConnection conn = new SQLiteConnection("Data Source=phoneDirection.db; Version=3");
+        
         public void showdata(string data)
         {
+            MessageBox.Show(Directory.GetCurrentDirectory());
             SQLiteDataAdapter da = new SQLiteDataAdapter(data, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
