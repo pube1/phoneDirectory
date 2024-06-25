@@ -22,9 +22,23 @@ namespace phoneDirectory
 
         SQLiteConnection conn = new SQLiteConnection("Data Source=phoneDirection.db; Version=3");
         
+        public void clearTextbox()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            maskedTextBox1.Clear();
+            deleteFindTb.Clear();
+            deleteIDTb.Clear();
+            updateIdTb.Clear();
+            updateNmbrMtb.Clear();
+            updateNmTb.Clear();
+            updateSearchTb.Clear();
+            updateSnTb.Clear();
+        }
+
         public void showdata(string data)
         {
-            MessageBox.Show(Directory.GetCurrentDirectory());
             SQLiteDataAdapter da = new SQLiteDataAdapter(data, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -56,6 +70,7 @@ namespace phoneDirectory
             cmd.ExecuteNonQuery();
             showdata("select * from contacts");
             conn.Close();
+            clearTextbox();
             MessageBox.Show("Registration done");
         }
 
@@ -75,22 +90,13 @@ namespace phoneDirectory
             cmd.ExecuteNonQuery();
             showdata("select * from contacts");
             conn.Close();
+            clearTextbox();
             MessageBox.Show("Deletion has taken place");
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            maskedTextBox1.Clear();
-            deleteFindTb.Clear();
-            deleteIDTb.Clear();
-            updateIdTb.Clear();
-            updateNmbrMtb.Clear();
-            updateNmTb.Clear();
-            updateSearchTb.Clear();
-            updateSnTb.Clear();
+            
 
             if (tabControl1.SelectedIndex == 1)
             {
@@ -101,6 +107,7 @@ namespace phoneDirectory
             {
                 MessageBox.Show("To update, enter the ID of the person to update and enter the information to update");
             }
+            clearTextbox();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -120,7 +127,7 @@ namespace phoneDirectory
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
 
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand();
@@ -139,6 +146,8 @@ namespace phoneDirectory
             }
             cmd.ExecuteNonQuery();
             showdata("select * from contacts");
+            MessageBox.Show("Update has taken place");
+            clearTextbox();
             conn.Close();
         }
     }
